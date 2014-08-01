@@ -1,0 +1,158 @@
+
+body {
+  font-family: "Open Sans", sans-serif;
+  font-size: 14px;
+}
+
+button {
+  text-transform: uppercase;
+  font-size: 14px;
+  padding-left: 25px;
+  padding-right: 25px;
+  background: #b1b1b1;
+  color: white;
+  border: 0;
+}
+
+button:active {
+  background: #888888;
+}
+
+.ngdialog h1 {
+  font-weight: 300;
+  text-transform: uppercase;
+}
+
+.ngdialog input {
+  font-size: 22px;
+  font-weight: 300;
+  border: 1px solid #DFDFDF;
+  margin: 10px auto;
+  padding: 15px;
+  width: 99%;
+}
+
+.ngdialog button {
+  width: 99%;
+  margin: 10px auto;
+  padding: 15px;
+}
+
+#top {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 70px;
+  background: #DFDFDF;
+}
+
+#top button {
+  float: right;
+  margin: 10px;
+  height: 45px;
+}
+
+#top h1 {
+  margin: 15px 10px;
+  font-weight: 300;
+  text-transform: uppercase;
+}
+
+#feeds {
+  position: absolute;
+  top: 70px; left: 0; bottom: 0;
+  background: #EEEEEE;
+  width: 200px;
+}
+
+#posts {
+  position: absolute;
+  top: 70px; bottom: 0;
+  left: 200px; width: 400px;
+  background: #F4F4F4;
+  border-left: 1px solid #DFDFDF;
+  overflow: scroll;
+}
+
+#content {
+  position: absolute;
+  bottom: 0; right: 0;
+  top: 70px; left: 600px;
+  background: #f6f5f7;
+  border-left: 1px solid #DFDFDF;
+}
+
+#feeds .feed {
+  padding: 15px;
+}
+
+#feeds .title, #feeds i {
+  display: inline;
+  color: #71636C;
+}
+
+#feeds .title {
+  margin-left: 5px;
+}
+
+#feeds .selected {
+  background: #828282;
+}
+
+#feeds .selected .title,
+#feeds .selected i {
+  color: white;
+}
+
+#posts .post {
+  padding: 20px 15px;
+  border-bottom: 1px solid #DFDFDF;
+}
+
+#posts .post .title {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+#posts .post .author,
+#posts .post .time {
+  text-transform: uppercase;
+  font-size: 12px;
+  color: #A7A7A7;
+}
+
+#posts .post .time {
+  float: right;
+}
+
+#posts .post .summary {
+  color: #8b8b8b;
+  margin-top: 10px;
+  line-height: 3ex;
+  height: 9ex;
+  overflow: hidden;
+}
+
+#posts .selected {
+  background: #828282;
+}
+
+#posts .selected div {
+  color: white !important;
+}
+
+#content {
+  overflow: scroll;
+  padding: 10px 30px;
+}
+
+#content img {
+  max-width: 100%;
+  height: auto;
+}
+
+#content .body,
+#content h3 {
+  padding-bottom: 20px;
+  max-width: 800px;
+  margin: auto;
+}

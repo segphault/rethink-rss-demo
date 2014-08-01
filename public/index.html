@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html ng-app="news">
+  <head>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/ng-dialog/0.2.3/js/ngDialog.min.js"></script>
+    <script type="text/javascript" src="/script/app.js"></script>
+
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700">
+    <link rel="stylesheet" href="//code.ionicframework.com/ionicons/1.4.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/ng-dialog/0.2.3/css/ngDialog.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/ng-dialog/0.2.3/css/ngDialog-theme-default.min.css">
+    <link rel="stylesheet" href="/style/main.css">
+
+  </head>
+  <body ng-controller="MainController">
+
+    <script type="text/ng-template" id="dialog">
+      <h1>Add  New Feed</h1>
+      <input ng-model="title" type="text" placeholder="Name"></input>
+      <input ng-model="url" type="text" placeholder="URL"></input>
+      <button ng-click="addFeed(title, url)">Add</button>
+    </script>
+
+    <div id="top">
+      <button ng-click="openAddFeedDialog()">Add Feed</button>
+      <button ng-show="selectedFeed" ng-click="removeSelectedFeed()">Remove Feed</button>
+      <h1>News Reader</h1>
+    </div>
+
+    <div id="feeds">
+      <div class="feed"
+        ng-repeat="feed in feeds"
+        ng-click="selectFeed(feed)"
+        ng-class="{selected: feed.id == selectedFeed.id}">
+        <i class="ion-social-rss"></i>
+        <div class="title" ng-bind="feed.title"></div>
+      </div>
+    </div>
+
+    <div id="posts">
+      <div class="post"
+        ng-repeat="post in posts"
+        ng-click="selectPost(post)"
+        ng-class="{selected: post.entry_id == selectedPost.entry_id}">
+        <div class="title" ng-bind="post.title"></div>
+        <div class="time" ng-bind="post.date | date: 'MMM d @ h:mm a'"></div>
+        <div class="author" ng-bind="post.author || selectedFeed.title"></div>
+        <div class="summary" ng-bind-html="post.summary | plainText"></div>
+      </div>
+    </div>
+
+    <div id="content">
+      <h3 ng-bind="selectedPost.title"></h3>
+      <div class="body" ng-bind-html="selectedPost.content || selectedPost.summary"></div>
+    </div>
+
+  </body>
+</html>
