@@ -4,8 +4,8 @@ require "json"
 include RethinkDB::Shortcuts
 
 DBNAME = "phaultnews"
-DBHOST = "localhost"
-DBPORT = 28015
+DBHOST = ENV["RDB_HOST"] || "localhost"
+DBPORT = ENV["RDB_PORT"] || 28015
 
 class UpdateFeedsJob
   include SuckerPunch::Job
@@ -30,7 +30,7 @@ class UpdateFeedsJob
         end
       end
 
-      r.table("posts").insert(posts, :upsert => true).run(con)
+      r.table("posts").insert(posts, :conflict => "replace").run(con)
     end
   rescue
     puts "#{Time.now} - Failed to refresh feeds"
@@ -78,8 +78,6 @@ end
 post "/feed" do
   content_type :json
 
-  puts "TEST:", params["url"]
-
   unless params["url"]
     return {success: false, err: "No URL Provided"}.to_json
   end
@@ -89,8 +87,8 @@ post "/feed" do
     title: params["title"] || params["url"]
   }
 
-  output = r.table("feeds").insert(args, :return_vals => true).run(@con)
-  UpdateFeedsJob.new.async.perform nil, [output["new_val"]]
+  output = r.table("feeds").insert(args, :return_changes => true).run(@con)
+  UpdateFeedsJob.new.async.perform nil#, [output["new_val"]]
 
   {success: true, feed: output["new_val"]}.to_json
 end
